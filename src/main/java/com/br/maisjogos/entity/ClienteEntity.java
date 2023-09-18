@@ -15,8 +15,8 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
+@SuppressWarnings("serial")
 @Entity(name = "users")
 @Getter
 @AllArgsConstructor

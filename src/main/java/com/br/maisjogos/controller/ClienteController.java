@@ -34,7 +34,7 @@ public class ClienteController{
     private TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data) {
+    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO data) {
     	var usenamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
     	
     	var auth = this.authenticationManager.authenticate(usenamePassword);
