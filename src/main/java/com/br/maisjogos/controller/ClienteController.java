@@ -15,7 +15,7 @@ import com.br.maisjogos.config.security.TokenService;
 import com.br.maisjogos.dto.AuthenticationDTO;
 import com.br.maisjogos.dto.ClienteDTO;
 import com.br.maisjogos.dto.RegisterDTO;
-import com.br.maisjogos.entity.ClienteEntity;
+import com.br.maisjogos.entity.Cliente;
 import com.br.maisjogos.repository.ClienteRepository;
 
 import jakarta.validation.Valid;
@@ -39,7 +39,7 @@ public class ClienteController{
     	
     	var auth = this.authenticationManager.authenticate(usenamePassword);
         
-    	var token = tokenService.generateToken((ClienteEntity) auth.getPrincipal());
+    	var token = tokenService.generateToken((Cliente) auth.getPrincipal());
  
     	return ResponseEntity.ok(new ClienteDTO(token));
     }
@@ -50,7 +50,7 @@ public class ClienteController{
           
         String senhaCripto = new BCryptPasswordEncoder().encode(data.getPassword());
 
-        ClienteEntity cli = new ClienteEntity(data.getNome(), data.getSobrenome(), data.getLogin(),
+        Cliente cli = new Cliente(data.getNome(), data.getSobrenome(), data.getLogin(),
         		data.getDataNasc(), senhaCripto, data.getConfirmarSenha(), data.getRole());
 
         this.repository.save(cli);

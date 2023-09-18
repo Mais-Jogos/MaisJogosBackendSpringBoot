@@ -1,6 +1,6 @@
 package com.br.maisjogos.dto;
 
-import com.br.maisjogos.entity.UseRole;
+import com.br.maisjogos.enums.UseRole;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

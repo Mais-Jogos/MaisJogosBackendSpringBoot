@@ -13,14 +13,14 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.br.maisjogos.entity.ClienteEntity;
+import com.br.maisjogos.entity.Cliente;
 
 @Service
 public class TokenService {
 	@Value("${api.security.token.secret}")
 	private String secreat;
 	
-	public String generateToken(ClienteEntity cliente) {
+	public String generateToken(Cliente cliente) {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(secreat);
 			String tokenString = JWT.create()

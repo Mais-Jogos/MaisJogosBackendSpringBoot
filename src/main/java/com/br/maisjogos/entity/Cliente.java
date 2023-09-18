@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.br.maisjogos.enums.UseRole;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +22,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class ClienteEntity implements UserDetails{
+public class Cliente implements UserDetails{
 	
 	
 	@Id
@@ -36,7 +37,7 @@ public class ClienteEntity implements UserDetails{
 	private UseRole role;
 	
 	
-	public ClienteEntity(String nome, String sobrenome, String login, String dataNasc, String password,
+	public Cliente(String nome, String sobrenome, String login, String dataNasc, String password,
 			String confirmarSenha, UseRole role) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
@@ -46,7 +47,7 @@ public class ClienteEntity implements UserDetails{
 		this.confirmarSenha = confirmarSenha;
 		this.role = role;
 	}
-	public ClienteEntity() {
+	public Cliente() {
 	
 	
 	}

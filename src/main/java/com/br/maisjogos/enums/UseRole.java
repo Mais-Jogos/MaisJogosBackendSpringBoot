@@ -1,4 +1,4 @@
-package com.br.maisjogos.entity;
+package com.br.maisjogos.enums;
 
 public enum UseRole {
 	CLIENTE("cliente"),
