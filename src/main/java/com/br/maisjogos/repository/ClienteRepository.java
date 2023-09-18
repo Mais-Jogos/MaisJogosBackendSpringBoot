@@ -7,6 +7,6 @@ import com.br.maisjogos.entity.ClienteEntity;
 
 public interface ClienteRepository extends JpaRepository<ClienteEntity, String>{
 	
-	UserDetails findByEmail(String email);
+	UserDetails findByLogin(String login);
 
 }
