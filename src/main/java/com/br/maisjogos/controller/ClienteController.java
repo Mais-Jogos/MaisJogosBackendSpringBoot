@@ -1,11 +1,17 @@
 package com.br.maisjogos.controller;
 
 
+import java.util.Optional;
+import java.util.List;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +23,10 @@ import com.br.maisjogos.dto.ClienteDTO;
 import com.br.maisjogos.dto.RegisterDTO;
 import com.br.maisjogos.entity.Cliente;
 import com.br.maisjogos.repository.ClienteRepository;
+import com.br.maisjogos.service.ClienteService;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 
 @RestController
@@ -26,6 +34,7 @@ import jakarta.validation.Valid;
 public class ClienteController{
     @Autowired
     private ClienteRepository repository;
+    ClienteService service;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -56,4 +65,27 @@ public class ClienteController{
         this.repository.save(cli);
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> getById(@PathVariable String id) {
+
+        Optional<Cliente> user = service.getById(id);
+        if (user.isPresent()) {
+            return new ResponseEntity<>(user.get(), HttpStatus.OK);
+        } else {
+            return null;
+        }
+    }
+    @GetMapping
+    public ResponseEntity<List<AuthenticationDTO>> findAll(){
+    	this.repository.findAll();
+    	return ResponseEntity.ok().build();
+    }
+    
+    
+    
+    
+    
+    
+    
 }

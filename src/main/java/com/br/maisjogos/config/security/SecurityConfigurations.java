@@ -35,6 +35,7 @@ public class SecurityConfigurations {
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(HttpMethod.POST, "auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "auth/cadastro").permitAll()
+						.requestMatchers(HttpMethod.GET, "auth").permitAll()
 						.requestMatchers(HttpMethod.POST, "/falorito").hasRole("CLIENTE")
 						.anyRequest().authenticated()
 				)
