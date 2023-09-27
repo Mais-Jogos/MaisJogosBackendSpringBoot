@@ -26,24 +26,7 @@ import jakarta.validation.Valid;
 public class ClienteController{
     @Autowired
     private ClienteRepository repository;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
     
-    @Autowired 
-    private TokenService tokenService;
-
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody @Valid AuthenticationDTO data) {
-    	var usenamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
-    	
-    	var auth = this.authenticationManager.authenticate(usenamePassword);
-        
-    	var token = tokenService.generateToken((Cliente) auth.getPrincipal());
- 
-    	return ResponseEntity.ok(new ClienteDTO(token));
-    }
-
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastro(@RequestBody @Valid RegisterDTO data) {
         if(this.repository.findByLogin(data.getLogin()) != null) return ResponseEntity.badRequest().build();
