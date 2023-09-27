@@ -1,5 +1,9 @@
 package com.br.maisjogos.controller;
 
-public class ReviewController {
+import com.br.maisjogos.entity.Review;
 
+public class ReviewController {
+    Review review = new Review();
+    String nome = this.review.getDataReview();
+    
 }
