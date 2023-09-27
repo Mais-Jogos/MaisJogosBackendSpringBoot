@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
-@Entity
+@Entity //Anotação de entidade
 public class Review {
 	@Id
     private String id;
