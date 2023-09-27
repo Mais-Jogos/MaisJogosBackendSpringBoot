@@ -3,9 +3,6 @@ package com.br.maisjogos.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,16 +24,5 @@ public class ClienteController{
     @Autowired
     private ClienteRepository repository;
     
-    @PostMapping("/cadastro")
-    public ResponseEntity<?> cadastro(@RequestBody @Valid RegisterDTO data) {
-        if(this.repository.findByLogin(data.getLogin()) != null) return ResponseEntity.badRequest().build();
-          
-        String senhaCripto = new BCryptPasswordEncoder().encode(data.getPassword());
-
-        Cliente cli = new Cliente(data.getNome(), data.getSobrenome(), data.getLogin(),
-        		data.getDataNasc(), senhaCripto, data.getConfirmarSenha(), data.getRole());
-
-        this.repository.save(cli);
-        return ResponseEntity.ok().build();
-    }
+   
 }

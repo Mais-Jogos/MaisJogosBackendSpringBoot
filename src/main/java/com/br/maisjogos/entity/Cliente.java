@@ -3,10 +3,6 @@ package com.br.maisjogos.entity;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import com.br.maisjogos.enums.UseRole;
 
 import jakarta.persistence.Entity;
@@ -22,7 +18,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Cliente implements UserDetails{
+public class Cliente{
 	
 	
 	@Id
@@ -100,38 +96,7 @@ public class Cliente implements UserDetails{
 	public void setRole(UseRole role) {
 		this.role = role;
 	}
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if(this.role == UseRole.CLIENTE)
-			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-		else 
-			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	}
-	@Override
-	public String getUsername() {
-		// TODO Auto-generated method stub
-		return login;
-	}
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+	
 	
 
 }
