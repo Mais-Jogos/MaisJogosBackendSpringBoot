@@ -9,7 +9,8 @@ import jakarta.persistence.Id;
 @Entity //Anotação de entidade
 public class Review {
 	@Id
-    private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private double notaReview;
 
@@ -19,8 +20,7 @@ public class Review {
     
     
     //Construtor geral
-	public Review(String id, double notaReview, String dataReview, String descricaoReview){
-		this.id = id;
+	public Review(double notaReview, String dataReview, String descricaoReview){
 		this.notaReview = notaReview;
 		this.dataReview = dataReview;
 		this.descricaoReview = descricaoReview;
@@ -32,11 +32,11 @@ public class Review {
 
 
 	//Getters e Setters
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
