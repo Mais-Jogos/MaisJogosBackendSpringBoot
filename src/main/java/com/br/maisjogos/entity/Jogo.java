@@ -16,8 +16,8 @@ public class Jogo {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String titulo;
 	private String descricao;
 	private String genero;
@@ -49,11 +49,15 @@ public class Jogo {
 		this.midia = midia;
 	}
 	
+	public Jogo() {
+		
+	}
 	
-	public String getId() {
+	
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getTitulo() {

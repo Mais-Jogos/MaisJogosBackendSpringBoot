@@ -6,6 +6,6 @@ import com.br.maisjogos.entity.Jogo;
 
 
 
-public interface JogoRepository extends JpaRepository<Jogo, String>{
+public interface JogoRepository extends JpaRepository<Jogo, Long>{
 
 }
