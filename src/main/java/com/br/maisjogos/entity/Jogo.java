@@ -1,5 +1,9 @@
 package com.br.maisjogos.entity;
 
+
+
+
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,11 +33,11 @@ public class Jogo {
 	private String tipoMemoria;
 	private Integer quantArmazenamento;
 	private String tipoArmazenamento;
-	private String midia;
+	private Long midia;
 	
-	public Jogo(String titulo, String descricao, String genero, String plataforma, String SO, String processador,
+	public Jogo(String titulo, String descricao, String genero, Long midia, String plataforma, String SO, String processador,
 			String placaDeVideo, Integer quantMemoria, String tipoMemoria, Integer quantArmazenamento,
-			String tipoArmazenamento, String midia) {
+			String tipoArmazenamento) {
 		super();
 		this.titulo = titulo;
 		this.descricao = descricao;
@@ -126,13 +130,13 @@ public class Jogo {
 	public void setTipoArmazenamento(String tipoArmazenamento) {
 		this.tipoArmazenamento = tipoArmazenamento;
 	}
-	public String getMidia() {
+	
+	public Long getMIDIA() {
 		return midia;
 	}
-	public void setMidia(String midia) {
+	public void setMIDIA(Long midia) {
 		this.midia = midia;
 	}
-	
 	
 	
 }

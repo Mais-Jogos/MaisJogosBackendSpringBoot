@@ -2,6 +2,8 @@ package com.br.maisjogos.service;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import com.br.maisjogos.entity.Jogo;
@@ -11,14 +13,14 @@ import jakarta.validation.Valid;
 
 @Service
 public class JogoService {
+	Logger logger = LogManager.getLogger(this.getClass());
 	private final JogoRepository jogoRepository;
-	
 	public JogoService(JogoRepository jogoRepository) {
 		this.jogoRepository = jogoRepository;
 	}
 	
 	public Jogo cadastroJogoService(@Valid Jogo jogo) {
-		return this.jogoRepository.save(jogo);
+			return this.jogoRepository.save(jogo);
 	}
 
 	public List<Jogo> retornaTodosOsJogosServices() {
@@ -83,9 +85,9 @@ public class JogoService {
 				jogo.setTipoArmazenamento(jogoAlterado.getTipoArmazenamento());				
 			}
 			
-			if(jogo.getMidia() == null) {
-				jogo.setMidia(jogoAlterado.getMidia());				
-			}
+			//if(jogo.getMidia() == null) {
+				//jogo.setMidia(jogoAlterado.getMidia());				
+			//}
 			return this.jogoRepository.save(jogo);
 		}
 		return null;

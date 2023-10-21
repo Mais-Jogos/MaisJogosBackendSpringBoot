@@ -1,7 +1,8 @@
 package com.br.maisjogos.controller;
 
-import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,6 +25,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/jogos")
 public class JogoController {
+	Logger logger = LogManager.getLogger(this.getClass());
 	private JogoService jogoService;
 	
 	@Autowired
@@ -37,10 +39,6 @@ public class JogoController {
 		return this.jogoService.cadastroJogoService(jogo);
 	}
 	
-	@GetMapping
-	public List<Jogo> retornaTodosOsJogos(){
-		return this.jogoService.retornaTodosOsJogosServices();
-	}
 	
 	@GetMapping("/{id}")
 	public Jogo retornaJogo(@PathVariable Long id) {
