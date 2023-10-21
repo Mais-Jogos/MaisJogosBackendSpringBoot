@@ -18,18 +18,22 @@ public class Review {
 
     private String descricaoReview;
     
+    private String tituloReview;
     
-    //Construtor geral
-	public Review(double notaReview, String dataReview, String descricaoReview){
+    private Jogo jogo;
+    
+	//Construtor geral
+	public Review(double notaReview, String dataReview, String descricaoReview, String tituloReview, Jogo jogo){
 		this.notaReview = notaReview;
 		this.dataReview = dataReview;
 		this.descricaoReview = descricaoReview;
+		this.tituloReview = tituloReview;
+		this.jogo = jogo;
 	} 
 	
 	//Construtor vazio
 	public Review() {
 	}
-
 
 	//Getters e Setters
 	public Long getId() {
@@ -62,6 +66,22 @@ public class Review {
 
 	public void setDescricaoReview(String descricaoReview) {
 		this.descricaoReview = descricaoReview;
+	}
+	
+    public String getTituloReview() {
+		return tituloReview;
+	}
+
+	public void setTituloReview(String tituloReview) {
+		this.tituloReview = tituloReview;
+	}
+	
+	public Jogo getJogo() {
+		return jogo;
+	}
+	
+	public void setJogo(Jogo jogo) {
+		this.jogo = jogo;
 	}
 
 }

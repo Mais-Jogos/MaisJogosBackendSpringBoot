@@ -49,7 +49,7 @@ public class ReviewController {
     //Atualizar
     @PutMapping("/{id}")
     public Review alterarReview(@PathVariable Long id,@Valid @RequestBody Review review){
-    	return this.reviewService.alterarReview(id,review);
+    	return this.reviewService.alterarReviewService(id,review);
     }
     
     //Deletar

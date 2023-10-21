@@ -3,6 +3,7 @@ package com.br.maisjogos.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.br.maisjogos.entity.Review;
 import com.br.maisjogos.repository.ReviewRepository;
@@ -33,7 +34,7 @@ public class ReviewService {
 	}
 	
 	//Put
-	public Review alterarReview(Long id, @Valid Review review) {
+	public Review alterarReviewService(Long id, @Valid @RequestBody Review review) {
 		if(this.reviewRepository.existsById(id)) {
 			Review reviewAlterado = this.reviewRepository.findById(id).get();
 			review.setId(id);
@@ -45,6 +46,12 @@ public class ReviewService {
 			}
 			if(review.getNotaReview()==0){
 				review.setNotaReview(reviewAlterado.getNotaReview());
+			}
+			if(review.getTituloReview()== null) {
+				review.setTituloReview(reviewAlterado.getTituloReview());
+			}
+			if(review.getJogo()== null) {
+				review.setJogo(reviewAlterado.getJogo());
 			}
 			return this.reviewRepository.save(review);
 		}
