@@ -16,7 +16,6 @@ import com.br.maisjogos.entity.GameMedia;
 import com.br.maisjogos.repository.GameMediaRepository;
 
 
-
 @Service
 public class GameMediaService {
 	Logger logger = LogManager.getLogger(this.getClass());
