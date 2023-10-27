@@ -1,11 +1,14 @@
 package com.br.maisjogos.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +18,7 @@ import com.br.maisjogos.config.security.TokenService;
 import com.br.maisjogos.dto.AuthenticationDTO;
 import com.br.maisjogos.dto.ClienteDTO;
 import com.br.maisjogos.dto.RegisterDTO;
+import com.br.maisjogos.entity.Avatar;
 import com.br.maisjogos.entity.Cliente;
 import com.br.maisjogos.repository.ClienteRepository;
 
@@ -56,4 +60,10 @@ public class ClienteController{
         this.repository.save(cli);
         return ResponseEntity.ok().build();
     }
+    
+    @GetMapping("/cliente")
+    public List<Cliente> retornaTodosClientes() {
+		return this.repository.findAll();
+	}
+    
 }

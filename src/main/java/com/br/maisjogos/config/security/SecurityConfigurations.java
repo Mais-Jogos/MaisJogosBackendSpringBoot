@@ -35,7 +35,8 @@ public class SecurityConfigurations {
 				.authorizeHttpRequests(authorize -> authorize
 						.requestMatchers(HttpMethod.POST, "auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "auth/cadastro").permitAll()
-						.requestMatchers(HttpMethod.POST, "/review").hasRole("CLIENTE")
+						.requestMatchers(HttpMethod.GET, "auth/cliente").permitAll()
+						.requestMatchers(HttpMethod.POST, "/release-avatares").permitAll()
 						.anyRequest().authenticated()
 				)
 				
