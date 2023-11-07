@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\vicen\OneDrive - Etec Centro Paula Souza\Documents\MaisJogosBackendSpringBoot"/>
 			<item value="C:\temp\ws-eclipse\mais-jogos"/>
 		</list>
 		<list key="projectNameTemplate">

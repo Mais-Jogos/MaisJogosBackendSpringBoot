@@ -14,9 +14,10 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.br.maisjogos.entity.Cliente;
+import com.br.maisjogos.entity.Desenvolvedor;
 
 @Service
-public class TokenService {
+public class TokenServiceCliente {
 	@Value("${api.security.token.secret}")
 	private String secreat;
 	
@@ -33,6 +34,8 @@ public class TokenService {
 			throw new RuntimeException("Erro ao gerar o token", exception);
 		}
 	}
+	
+	
 	
 	public String validateToken(String token) {
 		try {
@@ -53,4 +56,8 @@ public class TokenService {
 		
 		return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
 	}
+	
+	
+
+	
 }

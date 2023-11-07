@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.br.maisjogos.entity.Avatar;
 import com.br.maisjogos.repository.AvatarRepository;
+
+import jakarta.validation.Valid;
 
 
 @Service
@@ -29,32 +32,30 @@ public class AvatarService {
 		 this.environment = environment;
 	 } 
 	 
-	 public Avatar salvar(MultipartFile arquivo) throws IOException {
-		// **********************************************************
-		// Obter informações sobre o arquivo
-		// **********************************************************
-		String nome = arquivo.getOriginalFilename();
-		String tipo = arquivo.getContentType();
-		long tamanho = arquivo.getSize();
-		byte[] conteudo = arquivo.getBytes(); // Obtem o conteúdo do arquivo
-		// *********************************************************
-		// Processar o arquivo
-		// *********************************************************
-		// String nomeArquivo = UUID.randomUUID().toString() + "_" + arquivo.getOriginalFilename();
-		// String caminhoArquivo = environment.getProperty("imagem.upload-dir") + "/" + nomeArquivo;
-		// Path caminhoCompleto = Paths.get(caminhoArquivo).toAbsolutePath().normalize();
-		Path caminhoArquivo = Paths.get("avatares/" + nome);
-		Avatar imagem = new Avatar();
-		imagem.setNome(arquivo.getOriginalFilename());
-		imagem.setCaminho(caminhoArquivo.toString());
-		imagem.setArquivo(arquivo.getBytes());
-		logger.info(">>>>>> servico mantem imagem salvar - no disco e no db executado");
-		//***********************************************************
-		// salva no disco e no db
-		//***********************************************************
-		Files.write(caminhoArquivo, arquivo.getBytes());
-		return avatarRepository.save(imagem); 
-	 }
+	 public Avatar atualizarAvatar(Long id, MultipartFile arquivo) throws IOException {
+		    Optional<Avatar> avatarOptional = this.avatarRepository.findById(id);
+
+		    if (avatarOptional.isPresent()) {
+		        Avatar avatar = avatarOptional.get();
+
+		        // Obter informações sobre o novo arquivo
+		        String nome = arquivo.getOriginalFilename();
+		        byte[] conteudo = arquivo.getBytes();
+
+		        // Atualize os campos necessários do Avatar
+		        //avatar.setNome(nome);
+		        avatar.setArquivo(conteudo);
+
+		        // Salve as mudanças no banco de dados
+		        avatar = avatarRepository.save(avatar);
+
+		        logger.info(">>>>>> Serviço para atualizar Avatar executado");
+		        return avatar;
+		    } else {
+		        // O Avatar com o ID especificado não foi encontrado
+		        return null;
+		    }
+		}
 
 	public List<Avatar> retornaTodosOsAvataresServices() {
 		return this.avatarRepository.findAll();
@@ -65,5 +66,10 @@ public class AvatarService {
 			return this.avatarRepository.findById(id).get();			
 		}
 		return null;
+	}
+
+	public Avatar cadastrarAvatar(@Valid Avatar avatar) {
+		// TODO Auto-generated method stub
+		return this.avatarRepository.save(avatar);
 	}
 }

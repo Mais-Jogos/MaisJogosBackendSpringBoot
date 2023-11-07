@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.br.maisjogos.entity.Cliente;
 
-public interface ClienteRepository extends JpaRepository<Cliente, String>{
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 	
 	UserDetails findByLogin(String login);
 

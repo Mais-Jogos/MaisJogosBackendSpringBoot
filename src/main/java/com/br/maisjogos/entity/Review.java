@@ -6,10 +6,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 
-@Entity
+@Entity //Anotação de entidade
 public class Review {
 	@Id
-    private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private double notaReview;
 
@@ -17,26 +18,29 @@ public class Review {
 
     private String descricaoReview;
     
+    private String tituloReview;
     
-    //Construtor geral
-	public Review(String id, double notaReview, String dataReview, String descricaoReview){
-		this.id = id;
+    private String jogo;
+    
+	//Construtor geral
+	public Review(double notaReview, String dataReview, String descricaoReview, String tituloReview, String jogo){
 		this.notaReview = notaReview;
 		this.dataReview = dataReview;
 		this.descricaoReview = descricaoReview;
+		this.tituloReview = tituloReview;
+		this.jogo = jogo;
 	} 
 	
 	//Construtor vazio
 	public Review() {
 	}
 
-
 	//Getters e Setters
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -62,6 +66,22 @@ public class Review {
 
 	public void setDescricaoReview(String descricaoReview) {
 		this.descricaoReview = descricaoReview;
+	}
+	
+    public String getTituloReview() {
+		return tituloReview;
+	}
+
+	public void setTituloReview(String tituloReview) {
+		this.tituloReview = tituloReview;
+	}
+	
+	public String getJogo() {
+		return jogo;
+	}
+	
+	public void setJogo(String jogo) {
+		this.jogo = jogo;
 	}
 
 }

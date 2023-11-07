@@ -18,16 +18,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @SuppressWarnings("serial")
-@Entity(name = "users")
+@Entity
 @Getter
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
 public class Cliente implements UserDetails{
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.UUID)
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	private String nome;
 	private String sobrenome;
 	private String login;
@@ -35,10 +34,10 @@ public class Cliente implements UserDetails{
 	private String password;
 	private String confirmarSenha;
 	private UseRole role;
-	
+	private Integer moeda;
 	
 	public Cliente(String nome, String sobrenome, String login, String dataNasc, String password,
-			String confirmarSenha, UseRole role) {
+			String confirmarSenha, UseRole role, Integer moeda) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.login = login;
@@ -46,16 +45,17 @@ public class Cliente implements UserDetails{
 		this.password = password;
 		this.confirmarSenha = confirmarSenha;
 		this.role = role;
+		this.moeda = moeda;
 	}
 	public Cliente() {
 	
 	
 	}
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {
@@ -132,6 +132,12 @@ public class Cliente implements UserDetails{
 		// TODO Auto-generated method stub
 		return true;
 	}
+	public void setMoeda(Integer moeda) {
+		this.moeda = moeda;
+	}
+	public Integer getMoeda() {
+		return moeda;
+	}
 	
-
+	
 }

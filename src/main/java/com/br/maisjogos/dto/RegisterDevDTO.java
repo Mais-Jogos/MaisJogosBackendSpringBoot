@@ -1,5 +1,9 @@
 package com.br.maisjogos.dto;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import com.br.maisjogos.enums.UseRole;
 
 import lombok.Getter;
@@ -9,27 +13,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RegisterDTO {
+public class RegisterDevDTO {
 	private String nome;
-	private String sobrenome;
 	private String login;
 	private String dataNasc;
 	private String password;
 	private String confirmarSenha;
 	private UseRole role;
+	private String sobre;
 	
-	public RegisterDTO(String nome, String sobrenome, String login, String dataNasc, String password,
-			String confirmarSenha, UseRole role) {
+	public RegisterDevDTO(String nome, String login, String dataNasc, String password, String confirmarSenha,
+			UseRole role, String sobre) {
 		super();
 		this.nome = nome;
-		this.sobrenome = sobrenome;
 		this.login = login;
 		this.dataNasc = dataNasc;
 		this.password = password;
 		this.confirmarSenha = confirmarSenha;
 		this.role = role;
+		this.sobre = sobre;
 	}
-
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -38,13 +43,6 @@ public class RegisterDTO {
 		this.nome = nome;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
-	}
-
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
-	}
 
 	public String getLogin() {
 		return login;
@@ -85,7 +83,11 @@ public class RegisterDTO {
 	public void setRole(UseRole role) {
 		this.role = role;
 	}
-	
-	
+	public String getSobre() {
+		return sobre;
+	}
+	public void setSobre(String sobre) {
+		this.sobre = sobre;
+	}
 	
 }

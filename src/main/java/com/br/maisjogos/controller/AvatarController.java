@@ -11,15 +11,21 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.br.maisjogos.entity.Avatar;
+import com.br.maisjogos.entity.Jogo;
 import com.br.maisjogos.service.AvatarService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/release-avatares")
@@ -28,17 +34,23 @@ public class AvatarController {
 
 	@Autowired
 	AvatarService avatarService;
-
-	@CrossOrigin
+		
 	@PostMapping
-	public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
+	@ResponseStatus(HttpStatus.CREATED)
+	public Avatar cadastroAvatar(@Valid @RequestBody Avatar avatar) {
+		return this.avatarService.cadastrarAvatar(avatar);
+	}
+	
+	@CrossOrigin
+	@PatchMapping("/{id}")
+	public ResponseEntity<String> handleFileUpload(@PathVariable Long id, @RequestParam("file") MultipartFile file) {
 	    logger.info(">>>>>> api manipula file upload chamado");
 	    if (file != null && !file.isEmpty()) {
 	        logger.info(">>>>>> api manipula file upload file nao esta vazio");
 	        try {
 	            logger.info(">>>>>> api manipula file upload chamou servico salvar");
 	            
-	            avatarService.salvar(file);
+	            avatarService.atualizarAvatar(id, file);
 	            return ResponseEntity.ok().body("Imagem enviada com sucesso");
 	        } catch (FileNotFoundException e) {
 	        	logger.info(">>>>>> api manipula file upload arquivo não encontrado");
@@ -55,10 +67,12 @@ public class AvatarController {
 	        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Arquivo vazio");
 	    }
 	}
+	
 	@GetMapping
 	public List<Avatar> retornaTodosOsAvatares(){
 		return this.avatarService.retornaTodosOsAvataresServices();
 	}
+	
 	@GetMapping("/{id}")
 	public Avatar retornaAvatar(@PathVariable Long id) {
 		return this.avatarService.retornaAvatarService(id);

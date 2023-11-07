@@ -1,5 +1,6 @@
 package com.br.maisjogos.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,12 +30,13 @@ public class Jogo {
 	private String tipoMemoria;
 	private Integer quantArmazenamento;
 	private String tipoArmazenamento;
-	private String midia;
+	@Column(name = "jogo", length = 1000000000)
+	private byte[] jogo;
 	
 	public Jogo(String titulo, String descricao, String genero, String plataforma, String SO, String processador,
 			String placaDeVideo, Integer quantMemoria, String tipoMemoria, Integer quantArmazenamento,
-			String tipoArmazenamento, String midia) {
-		super();
+			String tipoArmazenamento, byte[] jogo) {
+		
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.genero = genero;
@@ -46,10 +48,12 @@ public class Jogo {
 		this.tipoMemoria = tipoMemoria;
 		this.quantArmazenamento = quantArmazenamento;
 		this.tipoArmazenamento = tipoArmazenamento;
-		this.midia = midia;
+		this.jogo = jogo;
 	}
 	
-	
+	public Jogo() {
+		
+	}
 	public String getId() {
 		return id;
 	}
@@ -122,11 +126,11 @@ public class Jogo {
 	public void setTipoArmazenamento(String tipoArmazenamento) {
 		this.tipoArmazenamento = tipoArmazenamento;
 	}
-	public String getMidia() {
-		return midia;
+	public byte[] getJogo() {
+		return jogo;
 	}
-	public void setMidia(String midia) {
-		this.midia = midia;
+	public void setJogo(byte[] jogo) {
+		this.jogo = jogo;
 	}
 	
 	

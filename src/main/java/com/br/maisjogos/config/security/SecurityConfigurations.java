@@ -23,7 +23,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class SecurityConfigurations {
 	@Autowired
-	SecurityFIlter securityFIlter;
+	SecurityFIlterCliente securityFIlterCliente;
+	@Autowired
+	SecurityFilterDev securityFilterDev;
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		return httpSecurity
@@ -33,14 +35,30 @@ public class SecurityConfigurations {
 	            })
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(HttpMethod.POST, "auth/login/dev").permitAll()
+						.requestMatchers(HttpMethod.POST, "auth/cadastro/dev").permitAll()
+						.requestMatchers(HttpMethod.GET, "auth/desenvolvedor").permitAll()
+						.requestMatchers(HttpMethod.GET, "auth/dev/{id}").permitAll()
 						.requestMatchers(HttpMethod.POST, "auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "auth/cadastro").permitAll()
 						.requestMatchers(HttpMethod.GET, "auth/cliente").permitAll()
+						.requestMatchers(HttpMethod.GET, "auth/{id}").permitAll()
+						.requestMatchers(HttpMethod.POST, "/jogos").permitAll()
+						.requestMatchers(HttpMethod.GET, "/jogos").permitAll()
+						.requestMatchers(HttpMethod.PATCH, "/jogos/{id}").permitAll()
 						.requestMatchers(HttpMethod.POST, "/release-avatares").permitAll()
+						.requestMatchers(HttpMethod.GET, "/release-avatares").permitAll()
+						.requestMatchers(HttpMethod.PATCH, "/release-avatares/{id}").permitAll()
+						.requestMatchers(HttpMethod.POST, "/review").permitAll()
+						.requestMatchers(HttpMethod.GET, "/review").permitAll()
+						.requestMatchers(HttpMethod.GET, "/review/{id}").permitAll()
+						.requestMatchers(HttpMethod.PUT, "/review/{id}").permitAll()
+						.requestMatchers(HttpMethod.DELETE, "/review/{id}").permitAll()
 						.anyRequest().authenticated()
 				)
 				
-				.addFilterBefore(securityFIlter, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(securityFIlterCliente, UsernamePasswordAuthenticationFilter.class)
+				.addFilterBefore(securityFilterDev, UsernamePasswordAuthenticationFilter.class)
 				.build()
 				;
 	}
